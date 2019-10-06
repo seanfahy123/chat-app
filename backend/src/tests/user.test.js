@@ -1,0 +1,27 @@
+const request = require("supertest");
+const app = require("../app");
+const User = require("../models/user");
+
+const testUser = {
+  username: "John",
+  email: "john@example.com",
+  password: "testtest1234"
+};
+
+beforeEach(async () => {
+  await User.deleteMany();
+});
+
+test("Can connect to server", async () => {
+  await request(app)
+    .get("/")
+    .send()
+    .expect(200);
+});
+
+test("Should signup a new user", async () => {
+  await request(app)
+    .post("/users")
+    .send(testUser)
+    .expect(201);
+});

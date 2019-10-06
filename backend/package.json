@@ -13,7 +13,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "dev": "nodemon src/index.js  nodemon src/db/mongoose.js"
+    "dev": "nodemon src/index.js",
+    "test": "jest --watchAll"
   },
   "jest": {
     "testEnvironment": "node"
