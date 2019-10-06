@@ -8,7 +8,7 @@ const testUser = {
   password: "testtest1234"
 };
 
-beforeEach(async () => {
+beforeAll(async () => {
   await User.deleteMany();
 });
 
@@ -24,4 +24,11 @@ test("Should signup a new user", async () => {
     .post("/users")
     .send(testUser)
     .expect(201);
+});
+
+test("Can request a user's info", async () => {
+  await request(app)
+    .get(`/users/${testUser.username}`)
+    .send()
+    .expect(200);
 });

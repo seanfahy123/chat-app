@@ -17,4 +17,20 @@ router.post("/users", async (req, res) => {
   }
 });
 
+router.get("/users/:username", async (req, res) => {
+  const username = req.params.username;
+
+  try {
+    const user = await User.findOne({ username });
+
+    if (!user) {
+      return res.status(404).send();
+    }
+
+    res.status(200).send(user);
+  } catch (e) {
+    res.status(500).send();
+  }
+});
+
 module.exports = router;
