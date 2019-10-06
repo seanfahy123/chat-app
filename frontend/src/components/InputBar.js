@@ -2,14 +2,19 @@ import React from "react";
 
 const InputBar = () => {
   return (
-    <div className="form-group">
-      <label className="col-form-label">Default input</label>
+    <div className="form-group" id="inputBar">
       <input
         type="text"
         className="form-control"
-        placeholder="Default input"
+        placeholder="Send message"
         id="inputDefault"
       />
+      <button type="button" class="btn btn-primary">
+        Send
+      </button>
+      <button type="button" class="btn btn-primary">
+        Share Location
+      </button>
     </div>
   );
 };
