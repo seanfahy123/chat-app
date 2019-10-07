@@ -4,7 +4,6 @@ import axios from "axios";
 const SignupForm = props => {
   async function submit() {
     const res = await axios.get("http://localhost:3000/");
-    console.log(res);
     if (res.status === 200) {
       props.setAuth(true);
     }

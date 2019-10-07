@@ -21,7 +21,14 @@ router.get("/messages/:room", async (req, res) => {
       return res.status(404).send();
     }
 
-    res.status(200).send(messages);
+    res
+      .writeHead(200, {
+        "Content-Type": "text/plain",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE"
+      })
+      .write(JSON.stringify(messages));
+    res.send();
   } catch (e) {
     console.log(e);
     res.status(500).send();

@@ -21,6 +21,19 @@
   bottom: 0;
 }
 
+#seperatingDiv {
+  width: 80%;
+  color: white;
+  background-color: white;
+  height: 2px;
+  margin-left: 10%;
+}
+
+#messages {
+  overflow-y: scroll;
+  max-height: calc(100vh - 100px);
+}
+
 #inputDefault {
   height: 56px;
   margin: 8px 0.5rem;
