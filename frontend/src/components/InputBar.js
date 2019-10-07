@@ -9,10 +9,10 @@ const InputBar = () => {
         placeholder="Send message"
         id="inputDefault"
       />
-      <button type="button" class="btn btn-primary">
+      <button type="button" className="btn btn-primary">
         Send
       </button>
-      <button type="button" class="btn btn-primary">
+      <button type="button" className="btn btn-primary">
         Share Location
       </button>
     </div>

@@ -1,15 +1,25 @@
 import React from "react";
+import axios from "axios";
 
-const SignupForm = () => {
+const SignupForm = props => {
+  async function submit() {
+    const res = await axios.get("http://localhost:3000/");
+    console.log(res);
+    if (res.status === 200) {
+      props.setAuth(true);
+    }
+  }
+
   return (
     <div id="formWindow">
       <div className="card signupform">
         <div className="card-body">
           <h4 className="card-title">Sign Up & Join room</h4>
-          {/* <label>Username</label>
+          <label>Username</label>
           <input
             type="text"
             className="form-control"
+            name="username"
             placeholder="Username"
             id="UsernameInput"
             required
@@ -21,39 +31,21 @@ const SignupForm = () => {
             placeholder="Password"
             required
           />
-          <button className="btn btn-primary" id="signup-button">
-            Sign up
-          </button> */}
-
-          <form action="/Chats">
-            <label>Username</label>
-            <input
-              type="text"
-              className="form-control"
-              name="username"
-              placeholder="Display name"
-              id="UsernameInput"
-              required
-            />
-            <label>Password</label>
-            <input
-              type="password"
-              className="form-control"
-              placeholder="Password"
-              required
-            />
-            <label>Room</label>
-            <input
-              type="text"
-              className="form-control"
-              name="room"
-              placeholder="Room"
-              required
-            />
-            <button className="btn btn-primary" id="signup-button">
-              Join
-            </button>
-          </form>
+          <label>Room</label>
+          <input
+            type="text"
+            className="form-control"
+            name="room"
+            placeholder="Room"
+            required
+          />
+          <button
+            className="btn btn-primary"
+            id="signup-button"
+            onClick={submit}
+          >
+            Join
+          </button>
         </div>
       </div>
     </div>

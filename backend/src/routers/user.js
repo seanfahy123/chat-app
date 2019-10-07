@@ -3,7 +3,14 @@ const User = require("../models/user");
 const router = new express.Router();
 
 router.get("/", async (req, res) => {
-  res.status(200).send("Request made");
+  res
+    .writeHead(200, {
+      "Content-Type": "text/plain",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE"
+    })
+    .write("successful request");
+  res.send();
 });
 
 router.post("/users", async (req, res) => {
