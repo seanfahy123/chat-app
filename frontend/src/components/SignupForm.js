@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
-const SignupForm = props => {
+const SignupForm = ({ setRoom, setUsername, setAuth }) => {
+  const [usernameText, setUsernameText] = useState("");
+  const [roomText, setRoomText] = useState("");
+
   async function submit() {
+    setRoom(roomText);
+    setUsername(usernameText);
     const res = await axios.get("http://localhost:3000/");
     if (res.status === 200) {
-      props.setAuth(true);
+      setAuth(true);
     }
+  }
+
+  function onUsernameChange(e) {
+    setUsernameText(e.target.value);
+  }
+
+  function onRoomChange(e) {
+    setRoomText(e.target.value);
   }
 
   return (
@@ -16,6 +29,7 @@ const SignupForm = props => {
           <h4 className="card-title">Sign Up & Join room</h4>
           <label>Username</label>
           <input
+            onChange={onUsernameChange}
             type="text"
             className="form-control"
             name="username"
@@ -25,6 +39,7 @@ const SignupForm = props => {
           />
           <label>Password</label>
           <input
+            onChange={onUsernameChange}
             type="password"
             className="form-control"
             placeholder="Password"
@@ -32,6 +47,7 @@ const SignupForm = props => {
           />
           <label>Room</label>
           <input
+            onChange={onRoomChange}
             type="text"
             className="form-control"
             name="room"

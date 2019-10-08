@@ -3,25 +3,27 @@ import InputBar from "./InputBar";
 import Message from "./Message";
 import axios from "axios";
 
-const room = 40;
+import openSocket from "socket.io-client";
 
-const ChatWindow = () => {
-  const [messages, setMessages] = useState([]);
-
-  async function loadEarlierMessages() {
-    const res = await axios.get(`http://localhost:3000/messages/${room}`);
-    setMessages(res.data);
-  }
+const ChatWindow = ({ room, username, newMessages }) => {
+  const socket = openSocket("http://localhost:8000");
+  const [olderMessages, setOlderMessages] = useState([]);
 
   useEffect(() => {
-    loadEarlierMessages();
-  }, []);
+    (async function loadEarlierMessages() {
+      const res = await axios.get(`http://localhost:3000/messages/${room}`);
+      setOlderMessages(res.data);
+    })();
+  }, [room]);
 
   return (
     <div id="chat-window">
       <div id="messages">
-        {messages.map(message => (
+        {olderMessages.map(message => (
           <Message sender={message.sender} key={message._id} />
+        ))}
+        {newMessages.map(message => (
+          <Message />
         ))}
       </div>
       <InputBar />
