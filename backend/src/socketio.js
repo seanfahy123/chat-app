@@ -1,21 +1,32 @@
 const io = require("socket.io")();
 const mongoose = require("mongoose");
 const Message = require("./models/message");
+const users = require("./utils/users");
 
 io.on("connection", socket => {
   console.log("CONNECTED");
 
-  socket.on("join", room => {
+  socket.on("join", ({ username, room }) => {
+    users.addUser(username, room, socket.id);
     socket.join(room);
+    io.to(room).emit("presentUsers", users.getUsersInRoom(room));
+  });
+
+  socket.on("disconnect", () => {
+    const disconnectingUser = users.removeUser(socket.id);
+    if (disconnectingUser) {
+      io.to(disconnectingUser.room).emit(
+        "presentUsers",
+        users.getUsersInRoom(disconnectingUser.room)
+      );
+    }
   });
 
   socket.on("sendMessage", async message => {
-    console.log("SENDING FROM SERVER");
+    console.log("sending message from server...");
     message._id = new mongoose.Types.ObjectId();
-    //message.createdAt = new Date().getTime();
     const messageToSave = new Message(message);
     await messageToSave.save();
-    console.log(messageToSave);
     io.to(message.room).emit("message", messageToSave);
   });
 });

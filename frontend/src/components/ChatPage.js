@@ -12,19 +12,29 @@ export default class ChatPage extends React.Component {
     this.state = {
       endpoint: "http://localhost:3001/",
       socket: io("http://localhost:8000"),
-      newMessages: []
+      newMessages: [],
+      presentUsers: []
     };
   }
 
   componentDidMount() {
-    this.state.socket.emit("join", this.props.room);
+    this.state.socket.emit("join", {
+      room: this.props.room,
+      username: this.props.username
+    });
 
     this.state.socket.on("message", message => {
       this.setState({
         ...this.state,
         newMessages: [...this.state.newMessages, message]
       });
-      console.log(this.state.newMessages);
+    });
+
+    this.state.socket.on("presentUsers", presentUsers => {
+      this.setState({
+        ...this.state,
+        presentUsers
+      });
     });
   }
 
@@ -37,7 +47,10 @@ export default class ChatPage extends React.Component {
   render() {
     return (
       <div id="chatPage">
-        <CurrentUsers room={this.props.room} />
+        <CurrentUsers
+          room={this.props.room}
+          presentUsers={this.state.presentUsers}
+        />
         <ChatWindow
           room={this.props.room}
           username={this.props.username}
