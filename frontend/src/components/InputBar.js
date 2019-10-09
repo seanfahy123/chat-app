@@ -1,18 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 
-import openSocket from "socket.io-client";
-
-const InputBar = () => {
-  const socket = openSocket("http://localhost:8000");
-  socket.emit("test", "this is a test");
-
-  socket.on("message", message => {
-    console.log(message);
-    //setNewMessages([...newMessages, message]);
-  });
-
-  //socket.emit("sendMessage", "this is a test message");
-
+const InputBar = ({ sendMessage }) => {
+  const [Message, setMessage] = useState("");
   return (
     <div className="form-group" id="inputBar">
       <input
@@ -20,18 +9,16 @@ const InputBar = () => {
         className="form-control"
         placeholder="Send message"
         id="inputDefault"
+        //value={Message}
       />
-      <button type="button" className="btn btn-primary">
-        Send
-      </button>
       <button
         type="button"
         className="btn btn-primary"
         onClick={() => {
-          socket.emit("sendMessage", "this is the on click message");
+          sendMessage({ message: "this is theexample messgge", b: 2 });
         }}
       >
-        Share Location
+        Send
       </button>
     </div>
   );

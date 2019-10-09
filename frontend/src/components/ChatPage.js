@@ -1,30 +1,50 @@
-import React, { useState } from "react";
+import React from "react";
 import ChatWindow from "./ChatWindow";
 import CurrentUsers from "./CurrentUsers";
 
-import openSocket from "socket.io-client";
+import io from "socket.io-client";
 
-const ChatPage = ({ room, username }) => {
-  const [currentUsers, setcurrentUsers] = useState([]);
-  const [newMessages, setNewMessages] = useState([]);
+export default class ChatPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.sendMessage = this.sendMessage.bind(this);
 
-  // const socket = openSocket("http://localhost:8000");
+    this.state = {
+      endpoint: "http://localhost:3001/",
+      socket: io("http://localhost:8000"),
+      newMessages: []
+    };
+  }
 
-  // socket.emit("test", "this is a test");
+  componentDidMount() {
+    this.state.socket.emit("join", this.props.room);
 
-  // socket.on("message", message => {
-  //   console.log(message);
-  //   setNewMessages([...newMessages, message]);
-  // });
+    this.state.socket.on("message", message => {
+      this.setState({
+        ...this.state,
+        newMessages: [...this.state.newMessages, message]
+      });
+      console.log(this.state.newMessages);
+    });
+  }
 
-  // //socket.emit("sendMessage", "this is a test message");
+  sendMessage = function sendMessage(message) {
+    message.room = this.props.room;
+    message.sender = this.props.username;
+    this.state.socket.emit("sendMessage", message);
+  };
 
-  return (
-    <div id="chatPage">
-      <CurrentUsers room={room} currentUsers={currentUsers} />
-      <ChatWindow room={room} username={username} newMessages={newMessages} />
-    </div>
-  );
-};
-
-export default ChatPage;
+  render() {
+    return (
+      <div id="chatPage">
+        <CurrentUsers room={this.props.room} />
+        <ChatWindow
+          room={this.props.room}
+          username={this.props.username}
+          newMessages={this.state.newMessages}
+          sendMessage={this.sendMessage}
+        />
+      </div>
+    );
+  }
+}

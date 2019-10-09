@@ -3,10 +3,7 @@ import InputBar from "./InputBar";
 import Message from "./Message";
 import axios from "axios";
 
-import openSocket from "socket.io-client";
-
-const ChatWindow = ({ room, username, newMessages }) => {
-  const socket = openSocket("http://localhost:8000");
+const ChatWindow = ({ room, newMessages, sendMessage }) => {
   const [olderMessages, setOlderMessages] = useState([]);
 
   useEffect(() => {
@@ -20,13 +17,21 @@ const ChatWindow = ({ room, username, newMessages }) => {
     <div id="chat-window">
       <div id="messages">
         {olderMessages.map(message => (
-          <Message sender={message.sender} key={message._id} />
+          <Message
+            sender={message.sender}
+            key={message._id}
+            text={message.message}
+          />
         ))}
         {newMessages.map(message => (
-          <Message />
+          <Message
+            sender={message.sender}
+            text={message.message}
+            key={message._id}
+          />
         ))}
       </div>
-      <InputBar />
+      <InputBar sendMessage={sendMessage} />
     </div>
   );
 };
