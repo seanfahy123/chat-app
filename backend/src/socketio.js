@@ -12,10 +12,11 @@ io.on("connection", socket => {
   socket.on("sendMessage", async message => {
     console.log("SENDING FROM SERVER");
     message._id = new mongoose.Types.ObjectId();
-    console.log(message);
+    //message.createdAt = new Date().getTime();
     const messageToSave = new Message(message);
     await messageToSave.save();
-    io.to(message.room).emit("message", message);
+    console.log(messageToSave);
+    io.to(message.room).emit("message", messageToSave);
   });
 });
 

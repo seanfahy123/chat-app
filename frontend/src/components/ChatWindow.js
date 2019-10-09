@@ -21,6 +21,7 @@ const ChatWindow = ({ room, newMessages, sendMessage }) => {
             sender={message.sender}
             key={message._id}
             text={message.message}
+            createdAt={message.createdAt}
           />
         ))}
         {newMessages.map(message => (
@@ -28,6 +29,7 @@ const ChatWindow = ({ room, newMessages, sendMessage }) => {
             sender={message.sender}
             text={message.message}
             key={message._id}
+            createdAt={message.createdAt}
           />
         ))}
       </div>
