@@ -1,23 +1,37 @@
 const express = require("express");
 const User = require("../models/user");
+const bcrypt = require("bcryptjs");
 const router = new express.Router();
 
 router.get("/", async (req, res) => {
-  res
-    .writeHead(200, {
-      "Content-Type": "text/plain",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE"
-    })
-    .write("successful request");
+  res.write("successful request");
   res.send();
 });
 
 router.post("/users", async (req, res) => {
-  const user = new User(req.body);
+  console.log(req.body);
+  const userExists = await User.findOne({ username: req.body.username });
+
   try {
-    await user.save();
-    res.status(201).send();
+    if (userExists) {
+      const isMatch = await bcrypt.compare(
+        req.body.password,
+        userExists.password
+      );
+
+      console.log(isMatch);
+
+      if (isMatch) {
+        res.status(202).send();
+      } else {
+        res.status(401).send();
+      }
+    } else {
+      const user = new User(req.body);
+      await user.save();
+
+      res.status(201).send(user);
+    }
   } catch (e) {
     console.log("ERROR CAUGHT", e);
     res.status(500).send();

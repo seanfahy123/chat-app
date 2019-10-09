@@ -6,7 +6,6 @@ const addUser = (username, room, ID) => {
 
   const user = { username, room, ID };
   users.push(user);
-  console.log(users);
   return;
 };
 

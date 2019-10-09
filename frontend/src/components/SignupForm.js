@@ -3,13 +3,19 @@ import axios from "axios";
 
 const SignupForm = ({ setRoom, setUsername, setAuth }) => {
   const [usernameText, setUsernameText] = useState("");
+  const [passwordText, setPasswordText] = useState("");
   const [roomText, setRoomText] = useState("");
 
   async function submit() {
     setRoom(roomText);
     setUsername(usernameText);
-    const res = await axios.get("http://localhost:3000/");
-    if (res.status === 200) {
+    const res = await axios.post("http://localhost:3000/users", {
+      username: usernameText,
+      password: passwordText
+    });
+    console.log(res);
+    // 201 for when it is created, 202 for when it is accepted
+    if (res.status === 201 || res.status === 202) {
       setAuth(true);
     }
   }
@@ -20,6 +26,10 @@ const SignupForm = ({ setRoom, setUsername, setAuth }) => {
 
   function onRoomChange(e) {
     setRoomText(e.target.value);
+  }
+
+  function onPasswordChange(e) {
+    setPasswordText(e.target.value);
   }
 
   return (
@@ -39,7 +49,7 @@ const SignupForm = ({ setRoom, setUsername, setAuth }) => {
           />
           <label>Password</label>
           <input
-            onChange={onUsernameChange}
+            onChange={onPasswordChange}
             type="password"
             className="form-control"
             placeholder="Password"
