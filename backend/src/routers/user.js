@@ -9,7 +9,6 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/users", async (req, res) => {
-  console.log(req.body);
   const userExists = await User.findOne({ username: req.body.username });
 
   try {
@@ -18,8 +17,6 @@ router.post("/users", async (req, res) => {
         req.body.password,
         userExists.password
       );
-
-      console.log(isMatch);
 
       if (isMatch) {
         res.status(202).send();

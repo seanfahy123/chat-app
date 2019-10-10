@@ -9,7 +9,7 @@ router.post("/messages", async (req, res) => {
     res.status(201).send();
   } catch (e) {
     console.log("ERROR CAUGHT", e);
-    res.status(500).send();
+    res.status(400).send();
   }
 });
 
@@ -23,7 +23,7 @@ router.get("/messages/:room", async (req, res) => {
     res.send(JSON.stringify(messages));
   } catch (e) {
     console.log(e);
-    res.status(500).send();
+    res.status(400).send();
   }
 });
 

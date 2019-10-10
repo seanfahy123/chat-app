@@ -19,7 +19,7 @@ test("Can connect to server", async () => {
     .expect(200);
 });
 
-test("Should add a new message", async () => {
+test("Can add a new message", async () => {
   await request(app)
     .post("/messages")
     .send(testMessage)
