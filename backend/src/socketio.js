@@ -28,5 +28,5 @@ io.on("connection", socket => {
   });
 });
 
-io.listen(process.env.SOCKETIO_PORT || 8000);
+//io.listen(process.env.SOCKETIO_PORT || 8000);
 console.log(`SocketIO server is up`);
