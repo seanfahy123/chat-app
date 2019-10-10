@@ -52,8 +52,8 @@ io.on("connection", socket => {
   });
 });
 
-io.listen(process.env.PORT, () => {
-  console.log("listening now");
+http.listen(process.env.PORT, () => {
+  console.log("list;ening now");
 });
 
 // const app = require("./app");
