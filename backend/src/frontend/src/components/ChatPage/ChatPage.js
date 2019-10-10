@@ -12,9 +12,12 @@ export default class ChatPage extends React.Component {
     this.state = {
       //      endpoint: "http://localhost:3001/",
       //`https://chat-app-sean-fahy.herokuapp.com`
-      socket: io(
-        `https://chat-app-sean-fahy.herokuapp.com:${process.env.SOCKETIO_PORT}`
-      ),
+      socket: io("https://chat-app-sean-fahy.herokuapp.com", {
+        port: process.env.SOCKETIO_PORT,
+        secure: true,
+        reconnect: true,
+        rejectUnauthorized: false
+      }),
       newMessages: [],
       presentUsers: []
     };
