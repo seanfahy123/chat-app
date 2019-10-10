@@ -22,8 +22,7 @@
   },
   "scripts": {
     "start": "node backend/src/index.js",
-    "dev": "nodemon backend/src/index.js",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "dev": "nodemon backend/src/index.js"
   },
   "author": "",
   "license": "ISC"
