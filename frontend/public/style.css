@@ -31,7 +31,7 @@
 
 #messages {
   overflow-y: scroll;
-  max-height: calc(100vh - 100px);
+  height: calc(100vh - 72px);
 }
 
 #inputDefault {
@@ -70,4 +70,11 @@
 
 .form-control {
   margin: 0.1rem 0 0.4rem 0;
+}
+
+.alert {
+  height: 100px;
+  width: calc(100% - 40px);
+  margin-left: 20px;
+  border-radius: 16px;
 }

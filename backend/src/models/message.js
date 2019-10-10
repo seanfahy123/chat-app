@@ -12,7 +12,7 @@ const messageSchema = new mongoose.Schema(
       required: true
     },
     room: {
-      type: Number,
+      type: String,
       required: true
     }
   },

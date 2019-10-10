@@ -24,7 +24,7 @@ router.post("/users", async (req, res) => {
       if (isMatch) {
         res.status(202).send();
       } else {
-        res.status(401).send();
+        res.status(200).send("User taken");
       }
     } else {
       const user = new User(req.body);
