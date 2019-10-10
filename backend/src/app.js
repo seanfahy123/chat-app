@@ -17,7 +17,7 @@ app.use(userRouter);
 app.use(messageRouter);
 
 app.get("*", (req, res) => {
-  res.sendfile(path.join(__dirname + "./../../frontend/build/"));
+  res.sendfile(path.join(__dirname + "./../../frontend/build/index.js"));
 });
 
 // app.use(express.static(path.join(__dirname + "./../../frontend/build")));
