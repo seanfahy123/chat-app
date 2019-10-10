@@ -3,13 +3,13 @@ const app = require("../app");
 const User = require("../models/user");
 
 const testUser = {
-  username: "John",
+  username: "JohnTest",
   email: "john@example.com",
   password: "testtest1234"
 };
 
 beforeAll(async () => {
-  await User.deleteMany();
+  await User.deleteMany({ username: testUser.username });
 });
 
 test("Can connect to server", async () => {

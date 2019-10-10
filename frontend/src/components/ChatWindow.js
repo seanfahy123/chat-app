@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import InputBar from "./InputBar";
 import Message from "./Message";
 import axios from "axios";
 
 const ChatWindow = ({ room, newMessages, sendMessage }) => {
   const [olderMessages, setOlderMessages] = useState([]);
+  const btmDiv = useRef(null);
 
   useEffect(() => {
     (async function loadEarlierMessages() {
@@ -13,9 +14,24 @@ const ChatWindow = ({ room, newMessages, sendMessage }) => {
     })();
   }, [room]);
 
+  useEffect(() => {
+    btmDiv.current.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  }, [newMessages]);
+
   return (
     <div id="chat-window">
       <div id="messages">
+        <button
+          onClick={() => {
+            btmDiv.current.scrollIntoView({
+              behavior: "smooth",
+              block: "start"
+            });
+          }}
+        ></button>
         {olderMessages.map(message => (
           <Message
             sender={message.sender}
@@ -32,6 +48,7 @@ const ChatWindow = ({ room, newMessages, sendMessage }) => {
             createdAt={message.createdAt}
           />
         ))}
+        <div ref={btmDiv}></div>
       </div>
       <InputBar sendMessage={sendMessage} />
     </div>

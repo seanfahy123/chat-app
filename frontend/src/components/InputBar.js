@@ -22,6 +22,7 @@ const InputBar = ({ sendMessage }) => {
     <div className="form-group">
       <form onSubmit={handleFormSubmit} id="inputBar">
         <input
+          autoComplete="off"
           type="text"
           className="form-control"
           placeholder="Send message"
