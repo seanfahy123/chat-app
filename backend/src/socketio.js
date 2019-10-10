@@ -28,7 +28,7 @@ io.on("connection", socket => {
   });
 });
 
-const port = 8000;
+const socketioport = process.env.SOCKETIO_PORT;
 
-io.listen(port);
-console.log(`SocketIO server is up on ${port}`);
+io.listen(socketioport);
+console.log(`SocketIO server is up on ${socketioport}`);

@@ -1,6 +1,6 @@
 const app = require("./app");
-const port = process.env.PORT;
+const expressport = process.env.EXPRESS_PORT;
 
-app.listen(port, () => {
-  console.log(`Express server is up on port ${port}`);
+app.listen(expressport, () => {
+  console.log(`Express server is up on port ${expressport}`);
 });
