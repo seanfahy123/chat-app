@@ -52,9 +52,10 @@ const path = require("path");
 
 app.use(express.json());
 
+app.use(express.static(path.join(__dirname + "/frontend/build")));
+
 app.use(userRouter);
 app.use(messageRouter);
-app.use(express.static(path.join(__dirname + "./../../frontend/build")));
 
 io.on("connection", socket => {
   socket.on("join", ({ username, room }) => {
