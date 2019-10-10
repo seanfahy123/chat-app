@@ -27,10 +27,13 @@ const SignupForm = ({ setRoom, setUsername, setAuth }) => {
     setUsername(usernameText);
 
     try {
-      const res = await axios.post("http://localhost:3000/users", {
-        username: usernameText,
-        password: passwordText
-      });
+      const res = await axios.post(
+        "https://chat-app-sean-fahy.herokuapp.com/users",
+        {
+          username: usernameText,
+          password: passwordText
+        }
+      );
 
       if (res.status === 201 || res.status === 202) {
         setAuth(true);

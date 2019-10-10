@@ -9,7 +9,9 @@ const ChatWindow = ({ room, newMessages, sendMessage }) => {
 
   useEffect(() => {
     (async function loadEarlierMessages() {
-      const res = await axios.get(`http://localhost:3000/messages/${room}`);
+      const res = await axios.get(
+        `https://chat-app-sean-fahy.herokuapp.com/messages/${room}`
+      );
       setOlderMessages(res.data);
     })();
   }, [room]);
