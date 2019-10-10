@@ -14,7 +14,7 @@ app.use(express.json());
 
 console.log(path.join(__dirname + "./../../frontend/build/index.html"));
 
-app.use(express.static(path.join(__dirname + "./../../frontend/build")));
+app.use(express.static(path.join(__dirname + "./../../frontend/build/")));
 app.use(userRouter);
 app.use(messageRouter);
 // app.use(express.static(path.join(__dirname + "./../../frontend/build")));
