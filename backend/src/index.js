@@ -52,7 +52,7 @@ io.on("connection", socket => {
   });
 });
 
-http.listen(process.env.PORT, () => {
+io.listen(process.env.PORT, () => {
   console.log("listening now");
 });
 
