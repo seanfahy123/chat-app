@@ -13,14 +13,10 @@
     "socket.io": "^2.2.0",
     "supertest": "^4.0.2"
   },
-  "devDependencies": {},
   "scripts": {
-    "start": "node src/index.js",
+    "start": "node backend/src/index.js",
     "dev": "nodemon src/index.js",
     "test": "jest --watchAll --runInBand"
-  },
-  "jest": {
-    "testEnvironment": "node"
   },
   "author": "",
   "license": "ISC"

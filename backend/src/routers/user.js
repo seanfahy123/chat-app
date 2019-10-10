@@ -3,9 +3,9 @@ const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const router = new express.Router();
 
-router.get("/", async (req, res) => {
-  res.send("successful request");
-});
+// router.get("/", async (req, res) => {
+//   res.send("successful request");
+// });
 
 router.post("/users", async (req, res) => {
   const userExists = await User.findOne({ username: req.body.username });
