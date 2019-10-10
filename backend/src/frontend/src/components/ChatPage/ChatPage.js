@@ -18,9 +18,7 @@ export default class ChatPage extends React.Component {
       //   reconnect: true,
       //   rejectUnauthorized: false
       // }
-      socket: io(
-        `https://chat-app-sean-fahy.herokuapp.com:${process.env.SOCKETIO_PORT}`
-      ),
+      socket: io(),
       newMessages: [],
       presentUsers: []
     };

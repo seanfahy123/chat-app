@@ -2,9 +2,9 @@ const express = require("express");
 
 const app = express();
 
-var http = require("http").Server(app);
+var https = require("https").Server(app);
 
-var io = require("socket.io")(http);
+var io = require("socket.io")(https);
 
 // vars past
 
@@ -50,7 +50,7 @@ io.on("connection", socket => {
   });
 });
 
-http.listen(process.env.PORT, () => {
+https.listen(process.env.PORT, () => {
   console.log("listening now");
 });
 
