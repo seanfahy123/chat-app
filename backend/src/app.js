@@ -12,12 +12,12 @@ require("./socketio");
 
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname + "./../../frontend/build/")));
+app.use(express.static(path.join(__dirname + "./../../../frontend/build/")));
 app.use(userRouter);
 app.use(messageRouter);
 
 app.get("*", (req, res) => {
-  res.sendfile(path.join(__dirname + "./../../frontend/build"));
+  res.sendfile(path.join(__dirname + "./../../../frontend/build"));
 });
 
 // app.use(express.static(path.join(__dirname + "./../../frontend/build")));
