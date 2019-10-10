@@ -8,10 +8,12 @@ export default class ChatPage extends React.Component {
   constructor(props) {
     super(props);
     this.sendMessage = this.sendMessage.bind(this);
-
-    this.state = {
-      endpoint: "http://localhost:3001/",
-      socket: io("http://localhost:8000"),
+    //chat-app-sean-fahy.herokuapp.com
+    https: this.state = {
+      //      endpoint: "http://localhost:3001/",
+      socket: io(
+        `https://chat-app-sean-fahy.herokuapp.com/${process.env.SOCKETIO_PORT}`
+      ),
       newMessages: [],
       presentUsers: []
     };
