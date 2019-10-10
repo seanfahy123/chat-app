@@ -26,8 +26,6 @@ test("Should signup a new user", async () => {
     .expect(201);
 });
 
-// write test to see if user is in DB
-
 test("Can request a user's info", async () => {
   await request(app)
     .get(`/users/${testUser.username}`)

@@ -4,8 +4,7 @@ const bcrypt = require("bcryptjs");
 const router = new express.Router();
 
 router.get("/", async (req, res) => {
-  res.write("successful request");
-  res.send();
+  res.send("successful request");
 });
 
 router.post("/users", async (req, res) => {
@@ -21,7 +20,7 @@ router.post("/users", async (req, res) => {
       if (isMatch) {
         res.status(202).send();
       } else {
-        res.status(200).send("User taken");
+        res.status(200).send();
       }
     } else {
       const user = new User(req.body);

@@ -16,10 +16,6 @@ router.post("/messages", async (req, res) => {
 router.get("/messages/:room", async (req, res) => {
   try {
     const messages = await Message.find({ room: req.params.room });
-
-    if (!messages) {
-      return res.status(404).send();
-    }
     res.send(JSON.stringify(messages));
   } catch (e) {
     console.log(e);

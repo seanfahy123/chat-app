@@ -6,6 +6,7 @@ const SignupForm = ({ setRoom, setUsername, setAuth }) => {
   const [usernameText, setUsernameText] = useState("");
   const [passwordText, setPasswordText] = useState("");
   const [roomText, setRoomText] = useState("");
+
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -24,6 +25,7 @@ const SignupForm = ({ setRoom, setUsername, setAuth }) => {
 
     setRoom(roomText);
     setUsername(usernameText);
+
     try {
       const res = await axios.post("http://localhost:3000/users", {
         username: usernameText,
@@ -43,56 +45,62 @@ const SignupForm = ({ setRoom, setUsername, setAuth }) => {
     setUsernameText(e.target.value);
   }
 
+  function onPasswordChange(e) {
+    setPasswordText(e.target.value);
+  }
+
   function onRoomChange(e) {
     setRoomText(e.target.value);
   }
 
-  function onPasswordChange(e) {
-    setPasswordText(e.target.value);
-  }
+  const handleFormSubmit = e => {
+    e.preventDefault();
+  };
 
   return (
     <div id="formWindow">
       <div className="card signupform">
         <div className="card-body">
           <h4 className="card-title">Sign Up / Login & Join room</h4>
-          <label>Username</label>
-          <input
-            autoComplete="off"
-            onChange={onUsernameChange}
-            type="text"
-            className="form-control"
-            name="username"
-            placeholder="Username"
-            id="UsernameInput"
-            required
-          />
-          <label>Password</label>
-          <input
-            autoComplete="off"
-            onChange={onPasswordChange}
-            type="password"
-            className="form-control"
-            placeholder="Password"
-            required
-          />
-          <label>Room</label>
-          <input
-            autoComplete="off"
-            onChange={onRoomChange}
-            type="text"
-            className="form-control"
-            name="room"
-            placeholder="Room"
-            required
-          />
-          <button
-            className="btn btn-primary"
-            id="signup-button"
-            onClick={submit}
-          >
-            Join
-          </button>
+          <form onSubmit={handleFormSubmit}>
+            <label>Username</label>
+            <input
+              autoComplete="off"
+              onChange={onUsernameChange}
+              type="text"
+              className="form-control"
+              name="username"
+              placeholder="Username"
+              id="UsernameInput"
+              required
+            />
+            <label>Password</label>
+            <input
+              autoComplete="off"
+              onChange={onPasswordChange}
+              type="password"
+              className="form-control"
+              placeholder="Password"
+              required
+            />
+            <label>Room</label>
+            <input
+              autoComplete="off"
+              onChange={onRoomChange}
+              type="text"
+              className="form-control"
+              name="room"
+              placeholder="Room"
+              required
+            />
+            <button
+              className="btn btn-primary"
+              id="signup-button"
+              onClick={submit}
+            >
+              Join
+            </button>
+          </form>
         </div>
         {showError && (
           <ErrorAlert errorMessage={errorMessage} setShowError={setShowError} />

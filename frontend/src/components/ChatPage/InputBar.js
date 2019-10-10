@@ -10,7 +10,6 @@ const InputBar = ({ sendMessage }) => {
 
   const onChange = e => {
     setMessage(e.target.value);
-    console.log(e.target.value);
   };
 
   const handleFormSubmit = e => {

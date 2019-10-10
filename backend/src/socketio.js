@@ -4,8 +4,6 @@ const Message = require("./models/message");
 const users = require("./utils/users");
 
 io.on("connection", socket => {
-  console.log("CONNECTED");
-
   socket.on("join", ({ username, room }) => {
     users.addUser(username, room, socket.id);
     socket.join(room);
@@ -23,7 +21,6 @@ io.on("connection", socket => {
   });
 
   socket.on("sendMessage", async message => {
-    console.log("sending message from server...");
     message._id = new mongoose.Types.ObjectId();
     const messageToSave = new Message(message);
     await messageToSave.save();

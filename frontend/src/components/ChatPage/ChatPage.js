@@ -1,8 +1,8 @@
 import React from "react";
+import io from "socket.io-client";
+
 import ChatWindow from "./ChatWindow";
 import CurrentUsers from "./CurrentUsers";
-
-import io from "socket.io-client";
 
 export default class ChatPage extends React.Component {
   constructor(props) {

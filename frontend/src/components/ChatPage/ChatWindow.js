@@ -35,8 +35,8 @@ const ChatWindow = ({ room, newMessages, sendMessage }) => {
         {newMessages.map(message => (
           <Message
             sender={message.sender}
-            text={message.message}
             key={message._id}
+            text={message.message}
             createdAt={message.createdAt}
           />
         ))}
