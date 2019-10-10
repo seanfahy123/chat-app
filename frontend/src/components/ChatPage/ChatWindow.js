@@ -24,14 +24,6 @@ const ChatWindow = ({ room, newMessages, sendMessage }) => {
   return (
     <div id="chat-window">
       <div id="messages">
-        <button
-          onClick={() => {
-            btmDiv.current.scrollIntoView({
-              behavior: "smooth",
-              block: "start"
-            });
-          }}
-        ></button>
         {olderMessages.map(message => (
           <Message
             sender={message.sender}

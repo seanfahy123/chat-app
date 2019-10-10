@@ -1,6 +1,6 @@
 import React, { StrictMode, useState } from "react";
-import ChatPage from "./components/ChatPage";
-import SignupForm from "./components/SignupForm";
+import ChatPage from "./components/ChatPage/ChatPage";
+import SignupForm from "./components/SignUpPage/SignupForm";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
