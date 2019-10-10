@@ -41,8 +41,8 @@ require("./db/mongoose");
 // require("./socketio");
 // EHRENENE
 const app = require("express")();
-
-var io = require("socket.io")(app);
+var http = require("http").Server(app);
+var io = require("socket.io")(http);
 
 const userRouter = require("./routers/user");
 const messageRouter = require("./routers/message");
@@ -80,7 +80,7 @@ io.on("connection", socket => {
   });
 });
 
-app.listen(process.env.PORT);
+http.listen(process.env.PORT);
 
 // EHUSNFE
 // app.use(express.json());
